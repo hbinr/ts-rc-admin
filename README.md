@@ -1,7 +1,7 @@
 # ts-rc-admin
 这是一个`typescript`+`routing-controller`+`koa2`的起手式(简单的空环境)
 
-在 ts-koa-starter 的基础上建立的
+在 [`ts-koa-starter`](https://github.com/Vibing/ts-koa-starter) 的基础上建立的
 ## 项目结构
 
 ```
@@ -37,4 +37,3 @@
 
 - Typescript [TypeScript 中文网 · TypeScript——JavaScript 的超集](https://www.tslang.cn/)
 - Koa2 [Koa (koajs) -- 基于 Node.js 平台的下一代 web 开发框架 \| Koajs 中文文档](https://koa.bootcss.com/)
-- 
