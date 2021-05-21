@@ -3,6 +3,7 @@ import 'reflect-metadata'; // 必须在 routing-controllers 之前引入，否�
 import { createKoaServer } from 'routing-controllers';
 // 引入环境变量
 import { PORT } from './config';
+import * as path from 'path'
 
 import { UserJsonController } from './study/01-json-controller';
 import { UserCtxController } from './study/02-context';
@@ -51,3 +52,30 @@ app.listen(3000);
 
 
 console.log(`应用启动成功 访问: http://127.0.0.1:${PORT}/users-json`);
+
+let defaultControllersPath = [path.join(path.dirname(process.mainModule.filename), 'controller')]
+console.log('process.mainModule.filename): ', process.mainModule.filename);
+console.log('defaultControllersPath: ', defaultControllersPath);
+console.log('__dirname: ', __dirname);
+
+const controllerPattern = '.js,.ts'
+// 2. 设置默认文件后缀
+let filePattern = controllerPattern
+
+// 3. 构建匹配成功的 controller
+// build controllers match pattern
+if (Array.isArray(filePattern)) {
+  filePattern = filePattern.map(fp => {
+    if (fp.startsWith('.')) return fp
+    else return `.${fp}`
+  }).join(',')
+}
+
+
+// 保证 controllersPath 是数组，因为Koa中 controllers 底层本质就是数组
+if (!Array.isArray(defaultControllersPath)) {
+  defaultControllersPath = [defaultControllersPath]
+}
+
+let controllers = defaultControllersPath.map(root => path.join(root, `**/*{${filePattern}}`))
+console.log('controllers: ', controllers);

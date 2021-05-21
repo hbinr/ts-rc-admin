@@ -1,5 +1,4 @@
 import { JsonController, Param, Body, Get, Post, Put, Delete } from 'routing-controllers';
-
 class User {
     id: bigint
     name: string
@@ -17,6 +16,7 @@ export class UserJsonController {
         user.age = 10
 
         return [user];
+
     }
 
     @Get('/users-json/:id')
