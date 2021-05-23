@@ -9,6 +9,5 @@ createServer({
   port: 8081
 })
 
-console.log("Server start http://127.0.0.1:8081t");
-console.log(customControllersPath);
+console.log("Server start http://127.0.0.1:8081/user/get");
 
