@@ -2,20 +2,20 @@
  * 增删改查，内容要点：
  * 1. 使用 sequelize 进行CURD操作
  * 2. 增加: create 方法,该 build(创建实例,类似new)方法和 save(插入数据) 方法合并为一个方法
- * 3. 修改
- * 4. 删除
- * 5. 查询
+ * 3. 修改: update
+ * 4. 删除: delete
+ * 5. 查询: findOne, findAll, findCountAndAll
  * 6. 记录实例: jane.toJSON(), 自动保证实例被 JSON.stringify 编辑好
  *
  */
 
-import { User } from './02-model-define';
-import * as sequelize from 'sequelize';
-import { Op } from 'sequelize';
+import { User } from './02-model-define'
+import * as sequelize from 'sequelize'
+import { Op } from 'sequelize'
 
 export async function UserCURD(): Promise<string> {
   // 1. 增加
-  const interDHB = await User.create({ firstName: 'hb', lastName: 'duan' })
+  const interDHB = await User.create({ firstName: 'rui', lastName: 'chang' })
   console.log('interDHB: ', interDHB.toString());
 
   // 2. 修改
@@ -66,7 +66,7 @@ export async function queryData(): Promise<Object> {
     attributes: [
       'id',
       // 使用聚合函数时,必须为它提供一个别名,以便能够从模型中访问它
-      [sequelize.fn('COUNT', sequelize.col('firstName')), 'n_firstName'],
+      // [sequelize.fn('COUNT', sequelize.col('id')), 'n_id'],
     ],
     group: 'id'
   })
@@ -136,14 +136,19 @@ export async function queryData(): Promise<Object> {
     raw: true,
     where: {
       id: {
-        [Op.gt]: 2
+        [Op.gt]: 1  // > 1
+        // [Op.gt]: 1  >= 1
       }
     }
   })
-  const data = rows.map(item => ({
-    id: item.id,
-    firsName: item.firstName + '_test'
-  }))
 
-  return JSON.stringify(data)
+  // let userInfos: UserInfo[] = []
+  // const data = rows.map(item => {
+  //   let userInfo = new UserInfo()
+  //   userInfo.uid = item.id
+  //   userInfo.name = item.firstName + item.lastName
+  //   userInfos.push(userInfo)
+  // })
+
+  return JSON.stringify(rows)
 }
