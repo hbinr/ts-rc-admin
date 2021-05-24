@@ -4,6 +4,7 @@ import { User, User2, UserInfo } from "src/study/sequelize/02-model-define";
 import { queryData, UserCURD } from "src/study/sequelize/03-curd";
 import { UserOrderAndGroup } from "src/study/sequelize/04-order-group-limit";
 import { Finders } from "src/study/sequelize/05-finders";
+import { RawQueries } from "src/study/sequelize/07-raw-query";
 
 @JsonController('/user')
 export default class {
@@ -13,6 +14,7 @@ export default class {
     // UserCURD()
     // queryData()
     // UserOrderAndGroup 
-    return Finders()
+    // Finders()
+    return RawQueries()
   }
 }

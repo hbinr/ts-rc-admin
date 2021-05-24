@@ -42,6 +42,5 @@ export async function Finders(): Promise<string> {
     limit: 5,
     offset: 3
   })
-  console.log('count----------: ', count);
   return JSON.stringify(rows)
 }
