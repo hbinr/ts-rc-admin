@@ -15,7 +15,7 @@ import { globalSequelize } from "./01-init-db"
 import { UserInfo } from "./02-model-define"
 
 
-const selectAllSQL = `select * from users`
+const selectAllSQL = `select * from Users`
 
 export async function RawQueries(): Promise<string> {
   // 1. 直接执行原始 sql
@@ -31,16 +31,16 @@ export async function RawQueries(): Promise<string> {
 
   // 3. 传递模型
   // Callee 是模型定义. 这样你就可以轻松地将查询映射到预定义的模型
-  const userInfos = await globalSequelize.query(`select * from user_info`, {
+  // const userInfos = await globalSequelize.query(`select * from user_info`, {
 
-    mapToModel: true, // 如果你有任何映射字段,则在此处传递 true
+  //   mapToModel: true, // 如果你有任何映射字段,则在此处传递 true
 
-    model: UserInfo  // 现在,`userInfos` 的每个元素都是 UserInfo 的一个实例
-  });
+  //   model: UserInfo  // 现在,`userInfos` 的每个元素都是 UserInfo 的一个实例
+  // });
 
 
   // 4. 防 SQL 注入。参数位置使用 ?
-  const userResults3 = await globalSequelize.query(`select * from users where id =`, {
+  const userResults3 = await globalSequelize.query(`select * from Users where id = ? `, {
     type: QueryTypes.SELECT,
     replacements: [1] // 参数类型必须为数组，按照它们在数组中出现的顺序被替换
   })
