@@ -7,7 +7,7 @@
  *    a. type: QueryTypes.SELECT 如果不需要访问元数据，那么可以指定本次sql执行的类型
  *    b. raw: true  返回原始数据
  *    c. 模型
- * 3. 防 SQL 注入。参数位置使用 ?
+ * 3. 防 SQL 注入。参数位置使用 ? 来占
  *
  */
 import { QueryTypes } from "sequelize"
@@ -24,7 +24,9 @@ export async function RawQueries(): Promise<string> {
   // console.log('results: ', results);    // metadata 和 results输出一模一样
 
   // 2. query() 第二个参数，指定SQL类型：query, insert, update, delete
-  const userResults = await globalSequelize.query(selectAllSQL, { type: QueryTypes.SELECT })
+  const userResults = await globalSequelize.query(selectAllSQL,
+    { type: QueryTypes.SELECT } // 指定SQL类型为 query
+  )
   const userResults2 = await globalSequelize.query(selectAllSQL, { raw: true })
 
   // 3. 传递模型
@@ -40,7 +42,7 @@ export async function RawQueries(): Promise<string> {
   // 4. 防 SQL 注入。参数位置使用 ?
   const userResults3 = await globalSequelize.query(`select * from users where id =`, {
     type: QueryTypes.SELECT,
-    replacements: [1]
+    replacements: [1] // 参数类型必须为数组，按照它们在数组中出现的顺序被替换
   })
 
   return JSON.stringify(userResults3)
