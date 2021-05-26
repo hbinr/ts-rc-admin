@@ -1,6 +1,15 @@
-import { createServer } from '@blued-core/http-server'
-import * as path from 'path';
+import 'reflect-metadata'
 
+import { createServer, useContainer } from '@blued-core/http-server'
+import * as path from 'path'
+import { initDB } from './app'
+import Container from 'typedi';
+
+
+// 1. 初始化 DB
+initDB()
+
+// 2. 启动 server
 // const customControllersWindowsPath = [path.join(path.dirname(process.mainModule.filename), '\\action\\live\\controller')]
 const customControllersMacPath = [path.join(path.dirname(process.mainModule.filename),
   '/action/live/controller')]
@@ -9,8 +18,10 @@ createServer({
   // controllersPath: customControllersWindowsPath,
   controllersPath: customControllersMacPath,
   logPath: './log',
-  port: 8081
+  port: 8081,
 })
 
-console.log("Server start http://127.0.0.1:8081/user/get");
+
+
+console.log("Server start http://127.0.0.1:8081/users/get");
 

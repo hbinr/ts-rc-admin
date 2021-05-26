@@ -1,5 +1,6 @@
 # ts-rc-admin
-这是一个`typescript`+`routing-controller`+`koa2`的起手式(简单的空环境)
+基于`typescript`+`routing-controller`+`koa2`+`typedi`+`sequelize`的demo
+
 
 在 [`ts-koa-starter`](https://github.com/Vibing/ts-koa-starter) 的基础上建立的
 ## 项目结构

@@ -2,7 +2,6 @@
 import 'reflect-metadata'; // 必须在 routing-controllers 之前引入，否则会报错
 import { createKoaServer } from 'routing-controllers';
 // 引入环境变量
-import { PORT } from '../config';
 import * as path from 'path'
 
 import { UserJsonController } from './routing-controller-stu/01-json-controller';
@@ -48,10 +47,10 @@ const app = createKoaServer({
 
 // app.use(compression()); // 全局使用 compression 中间件
 // 在3000端口运行Koa应用
-app.listen(3000);
+app.listen(8081);
 
 
-console.log(`应用启动成功 访问: http://127.0.0.1:${PORT}/users-json`);
+console.log(`应用启动成功 访问: http://127.0.0.1:8081/users-json`);
 
 let defaultControllersPath = [path.join(path.dirname(process.mainModule.filename), 'controller')]
 console.log('process.mainModule.filename): ', process.mainModule.filename);
