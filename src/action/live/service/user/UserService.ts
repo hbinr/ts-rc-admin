@@ -1,10 +1,15 @@
-import { Service } from 'typedi'
+import { Inject, Service } from 'typedi'
 
 import { UserDTO } from './types/UserDTO';
 import User from '../../model/User';
+import { UserDao } from '../../dao/UserDao';
 
 @Service()
 export class UserService {
+
+  @Inject()
+  private userDao: UserDao
+
 
   async createSlow(): Promise<void> { }
 
@@ -15,7 +20,7 @@ export class UserService {
   // }
 
   async findUserByID(id: number): Promise<UserDTO> {
-    const user = await User.findByPk(id, { raw: true })
+    const user = await this.userDao.findUserByID(id)
     return buildUserDTO(user)
   }
 

@@ -3,7 +3,6 @@ import 'reflect-metadata'
 import { createServer, useContainer } from '@blued-core/http-server'
 import * as path from 'path'
 import { initDB } from './app'
-import Container from 'typedi';
 
 
 // 1. 初始化 DB

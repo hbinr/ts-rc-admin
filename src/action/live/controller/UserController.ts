@@ -2,18 +2,15 @@ import { Get, JsonController, Param } from "@blued-core/http-server";
 import Container, { Inject, Service } from "typedi";
 
 import {
-  UserDTO,
   UserService
 } from '../service/user'
-
-console.log('UserService: ', UserService);
 
 @Service()
 @JsonController('/users')
 export default class {
-  // @Inject()  // 不生效 改用 Container.get()
-  // private userService: UserService
+  // 最上层使用 Container.get() 来注入实例，这样 @Inject()  UserDao 便能注入成功了
   private userService = Container.get(UserService)
+
   @Get('/get/:id')
   async getUser(@Param('id') id: number) {
     // 需要使用 await 修饰， 不能直接 this.userService.findUserByID(id)
