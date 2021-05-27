@@ -2,6 +2,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "noImplicitAny": true, /* 是否默认禁用 any */
     "skipLibCheck": true,
     "declaration": false,
@@ -11,7 +12,18 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./"
+    "rootDir": "./src",
+    "baseUrl": "./src",
+    "paths": {
+      "@model/*":["action/live/model/*"],
+      "@service/*":["action/live/service/*"],
+      "@repository/*":["action/live/repository/*"],
+      "@controller/*":["action/live/controller/*"],
+      "@errors/*":["action/live/errors/*"],
+      "@common/*":["action/live/common/*"],
+
+
+    }
   },
   "exclude": ["node_modules"],
   "include": ["src/**/*"]

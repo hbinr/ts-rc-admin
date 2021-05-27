@@ -54,7 +54,7 @@ export default class User extends Model<User>{
     field: 'role_name'
 
   })
-  roleName: string;
+  roles: string;
 
   @Column({
     comment: '创建时间',

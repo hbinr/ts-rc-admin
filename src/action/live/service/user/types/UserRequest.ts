@@ -30,4 +30,6 @@ export class UserRequest {
     message: '请输入有效的电话号码(中国)'
   })
   phone: string
+
+  roles: string
 }
