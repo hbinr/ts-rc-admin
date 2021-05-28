@@ -4,13 +4,6 @@ import { Column, Model, Table } from "sequelize-typescript";
   tableName: 'user'
 })
 export default class User extends Model<User>{
-  @Column({
-    comment: '主键ID',
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-  })
-  id: number
 
   @Column({
     comment: '用户ID',

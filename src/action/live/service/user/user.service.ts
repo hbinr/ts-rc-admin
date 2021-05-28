@@ -54,6 +54,7 @@ export class UserService implements IUserService {
     user.phone = phone
     user.password = Md5.hashStr(password)
     user.roles = roles
+    user.createdAt = new Date(Date.parse(new Date().toString()))
 
     // sequelize 中的所有SQL操作都是 async 函数，需要await修饰来等待函数执行完成。
     // 如果使用 常量/变量 接收Promise 对象，会提升性能，能够给异步执行，而不是同步执行
