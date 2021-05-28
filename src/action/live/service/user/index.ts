@@ -2,4 +2,4 @@ export {
   UserRequest,
 } from './types';
 
-export { UserService } from './UserService';
+export { UserService } from './user.service';

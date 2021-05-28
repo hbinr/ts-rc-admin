@@ -9,11 +9,13 @@
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "moduleResolution": "node", /* 引入 inversify */
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "baseUrl": "./src",
+    /* 配置 import 路径,更优雅简洁的导入模块*/
     "paths": {
       "@model/*":["action/live/model/*"],
       "@service/*":["action/live/service/*"],
@@ -21,7 +23,7 @@
       "@controller/*":["action/live/controller/*"],
       "@errors/*":["action/live/errors/*"],
       "@common/*":["action/live/common/*"],
-
+      "@config/*":["action/live/config/*"],
 
     }
   },

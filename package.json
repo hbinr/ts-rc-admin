@@ -1,7 +1,7 @@
 {
   "name": "ts-rc-admin",
   "version": "1.0.0",
-  "description": "基于typescript+routing-controller+koa2+typedi+sequelize的demo",
+  "description": "基于typescript+routing-controller+koa2+inversify+sequelize的demo",
   "tags": [
     "orm",
     "typescript",

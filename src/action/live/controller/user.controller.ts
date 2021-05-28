@@ -1,14 +1,19 @@
+import 'reflect-metadata'
+
 import { Body, Get, JsonController, Param, Post } from "@blued-core/http-server";
-import Container, { Service } from "typedi";
 
 import { UserService } from '@service/user'
 import { UserRequest } from '@service/user/types';
-
+import Container, { Service } from 'typedi';
 @Service()
 @JsonController('/users')
-export default class {
-  // 最上层使用 Container.get() 来注入实例，这样 @Inject()  UserDao 便能注入成功了
-  private userService = Container.get(UserService)
+export class UserController {
+
+  private userService: UserService
+
+  constructor() {
+    this.userService = Container.get(UserService)
+  }
 
   @Get('/:id')
   async getUser(@Param('id') id: number) {
