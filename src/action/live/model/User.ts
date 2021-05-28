@@ -15,30 +15,26 @@ export default class User extends Model<User>{
   @Column({
     comment: '用户ID',
     allowNull: false,
-    field: 'user_id'
+    field: 'user_id',
   })
-  userID: number
+  userID: string
 
   @Column({
     comment: '用户名',
     allowNull: false,
     field: 'user_name'
-
-
   })
   userName: string
 
   @Column({
     comment: '密码',
     allowNull: false
-    // TODO 增加 hook 函数, 密码加密  service 层做?
   })
   password: string
 
   @Column({
-    comment: '密码',
+    comment: '邮箱',
     allowNull: false
-    // TODO 增加 hook 函数, 邮箱验证 service 层做?
   })
   email: string
 
@@ -51,8 +47,8 @@ export default class User extends Model<User>{
   @Column({
     comment: '角色名称',
     allowNull: false,
-    field: 'role_name'
-
+    field: 'role_name',
+    defaultValue: 'No role'
   })
   roles: string;
 
@@ -66,10 +62,8 @@ export default class User extends Model<User>{
 
   @Column({
     comment: '更改时间',
-    allowNull: false,
     field: 'updated_at'
 
   })
   updatedAt: Date
-
 }

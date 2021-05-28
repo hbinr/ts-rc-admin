@@ -2,10 +2,11 @@ import 'reflect-metadata'
 
 import { createServer, useContainer } from '@blued-core/http-server'
 import * as path from 'path'
-import { initDB } from './app'
+import initDB from './app'
 /* 导入 Container不起作用*/
 // import { Container } from 'typedi';
 // 1. 初始化 DB
+
 initDB()
 /* 导入 Container不起作用*/
 // useContainer(Container)

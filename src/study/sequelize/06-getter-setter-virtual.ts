@@ -7,15 +7,14 @@
  * 3. get()  获取值，然后再进行处理
  * 4. set()  设置 Sequelize 在将数据发送到数据库之前自动调用了设置器. 
  * 5. set() 和 get() 可以对同一个字段混合使用
- * 6. DataTypes.VIRTUAL  虚拟字段，顾名思义，在数据库中不存在的字段，类似DTO中，需要额外处理的传输字段s
+ * 6. DataType.VIRTUAL  虚拟字段，顾名思义，在数据库中不存在的字段，类似DTO中，需要额外处理的传输字段s
  * 
  */
 
 
 
 import { globalSequelize } from "./01-init-db"
-import { DataTypes } from "sequelize"
-import { Column, Model, Table } from "sequelize-typescript"
+import { Column, Model, Table, DataType } from "sequelize-typescript"
 import { createHash } from "crypto"
 
 // 1. get()/set() 应用， 方式一：使用 sequelize.define()
@@ -23,7 +22,7 @@ const User = globalSequelize.define('user', {
   // 假设我们想要以大写形式查看每个用户名,
   // 即使它们在数据库本身中不一定是大写的
   username: {
-    type: DataTypes.STRING,
+    type: DataType.STRING,
     get() {
       const rawValue = this.getDataValue('username');  // this.username 无效
       return rawValue ? rawValue.toUpperCase() : null;
@@ -93,7 +92,7 @@ export class UserForVirtual extends Model<UserForVirtual>{
   @Column
   lastName: string
   @Column({
-    type: DataTypes.VIRTUAL,
+    type: DataType.VIRTUAL,
     get() {
       //  下列代码报错
       // return `${this.firstName} ${this.lastName}`

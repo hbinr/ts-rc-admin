@@ -1,0 +1,1 @@
+export { HttpStatusError } from './http-status.error';

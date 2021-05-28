@@ -24,7 +24,7 @@
       "@errors/*":["action/live/errors/*"],
       "@common/*":["action/live/common/*"],
       "@config/*":["action/live/config/*"],
-
+      "@dto/*":["action/live/dto/*"],
     }
   },
   "exclude": ["node_modules"],
