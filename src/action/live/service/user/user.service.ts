@@ -7,14 +7,14 @@ import { UserRepo } from '@repository/user';
 
 // 导入顺序3: 父目录中的模块-通用
 import User from '@model/User';
-import { HttpStatusError } from '@errors/http-status.error';
-import { HttpStatus } from '@common/constant/http-status';
 
 // 导入顺序4: 来自相同或兄弟目录的模块
 import { UserRequest } from './types';
 import { IUserService } from './user-interface.service';
 import { UserDto } from '@dto/user.dto';
 import uuid from 'action/live/util/uuid/uuid';
+import { UserException } from '@errors/user.error';
+import { ResultCode } from '@common/constant';
 
 @Service()
 export class UserService implements IUserService {
@@ -33,18 +33,18 @@ export class UserService implements IUserService {
 
     const isUserNameExist = this.isUserNameExist(userName)
     if (await isUserNameExist) {
-      throw new HttpStatusError(HttpStatus.BAD_REQUEST, '用户名已存在')
+      throw new UserException(ResultCode.USER_HAS_EXISTED, userName)
     }
 
     const isEmailExist = this.isEmailExist(email)
     if (await isEmailExist) {
-      throw new HttpStatusError(HttpStatus.BAD_REQUEST, '邮箱已存在')
+      throw new UserException(ResultCode.USER_EMAIL_HAS_EXISTED, email)
     }
 
 
     const isPhoneExist = this.isPhoneExist(phone)
     if (await isPhoneExist) {
-      throw new HttpStatusError(HttpStatus.BAD_REQUEST, '手机号已存在')
+      throw new UserException(ResultCode.USER_PHONE_HAS_EXISTED, phone)
     }
 
     let user: User = new User()
@@ -68,6 +68,9 @@ export class UserService implements IUserService {
 
   async getUserByID(id: number): Promise<UserDto> {
     const user = await this.userRepo.findByID(id)
+    if (!Boolean(user)) {
+      throw new UserException(ResultCode.USER_NOT_EXIST, `id: ${id}`)
+    }
     return new UserDto(user)
   }
 

@@ -1,4 +1,4 @@
-export default class AppResult<T>{
+export default class ApiResult<T>{
   private code: number
   private msg: string
   private data: T
