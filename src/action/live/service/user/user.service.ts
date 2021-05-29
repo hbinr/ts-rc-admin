@@ -8,13 +8,13 @@ import { UserRepo } from '@repository/user';
 // 导入顺序3: 父目录中的模块-通用
 import User from '@model/User';
 import { HttpStatusError } from '@errors/http-status.error';
-import { HttpStatus } from '@common/http/http-status';
+import { HttpStatus } from '@common/constant/http-status';
 
 // 导入顺序4: 来自相同或兄弟目录的模块
 import { UserRequest } from './types';
 import { IUserService } from './user-interface.service';
 import { UserDto } from '@dto/user.dto';
-import uuid from '@common/uuid/uuid';
+import uuid from 'action/live/util/uuid/uuid';
 
 @Service()
 export class UserService implements IUserService {
