@@ -13,7 +13,7 @@ import { UserRequest } from './types';
 import { IUserService } from './user-interface.service';
 import { UserDto } from '@dto/user.dto';
 import uuid from 'action/live/util/uuid/uuid';
-import { UserException } from '@errors/user.error';
+import { UserException } from '@common/errors/user.error';
 import { ResultCode } from '@common/constant';
 
 @Service()

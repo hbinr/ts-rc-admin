@@ -3,7 +3,7 @@ import { Body, Get, JsonController, Param, Post } from "@blued-core/http-server"
 import { UserService } from '@service/user'
 import { UserRequest } from '@service/user/types';
 import Container, { Service } from 'typedi';
-import { ResultCode } from '../common/constant/result-code';
+import { ResultCode } from '@common/constant/result-code';
 import ApiResultBuild from '@common/response/response-build';
 @Service()
 @JsonController('/users')
