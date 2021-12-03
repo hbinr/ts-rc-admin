@@ -23,7 +23,6 @@ export class BasicException extends Error {
    * 如果是子类，请在构造器中执行super()、super.setMap(map)后调用
    * @param code 业务状态码
    * @param detail 错误明细
-   * @param httpCode 请求状态码
    */
   protected check(
     code: number = ResultCode.UNKNOWN,

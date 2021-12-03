@@ -7,6 +7,7 @@ import { IUserRepository } from './user-interface.repository';
 export class UserRepo implements IUserRepository {
 
 
+
   async create(user: User): Promise<void> {
     // 版本是 6.6.2 情况下，以下两种方式都失败：
     // 1. 直接传递对象，调用API
@@ -39,7 +40,24 @@ export class UserRepo implements IUserRepository {
   }
 
   async findByID(id: number): Promise<User> {
-    return await User.findByPk(id, { raw: true, })
+    return await User.findByPk(id, { raw: true })
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    return await User.findOne({
+      where: {
+        email,
+      },
+      raw: true,
+    })
+  }
+  async findByPhone(phone: string): Promise<User> {
+    return await User.findOne({
+      where: {
+        phone,
+      },
+      raw: true,
+    })
   }
 
 }

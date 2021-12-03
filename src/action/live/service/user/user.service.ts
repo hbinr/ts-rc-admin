@@ -12,9 +12,9 @@ import User from '@model/User';
 import { UserRequest } from './types';
 import { IUserService } from './user-interface.service';
 import { UserDto } from '@dto/user.dto';
-import uuid from 'action/live/util/uuid/uuid';
 import { UserException } from '@common/errors/user.error';
 import { ResultCode } from '@common/constant';
+import uuid from 'action/live/util/uuid';
 
 @Service()
 export class UserService implements IUserService {
@@ -30,22 +30,14 @@ export class UserService implements IUserService {
     phone,
     roles
   }: UserRequest): Promise<void> {
-
     const isUserNameExist = this.isUserNameExist(userName)
-    if (await isUserNameExist) {
-      throw new UserException(ResultCode.USER_HAS_EXISTED, userName)
-    }
+    if (await isUserNameExist) throw new UserException(ResultCode.USER_HAS_EXISTED, userName)
 
     const isEmailExist = this.isEmailExist(email)
-    if (await isEmailExist) {
-      throw new UserException(ResultCode.USER_EMAIL_HAS_EXISTED, email)
-    }
-
+    if (await isEmailExist) throw new UserException(ResultCode.USER_EMAIL_HAS_EXISTED, email)
 
     const isPhoneExist = this.isPhoneExist(phone)
-    if (await isPhoneExist) {
-      throw new UserException(ResultCode.USER_PHONE_HAS_EXISTED, phone)
-    }
+    if (await isPhoneExist) throw new UserException(ResultCode.USER_PHONE_HAS_EXISTED, phone)
 
     let user: User = new User()
     user.userName = userName
@@ -68,9 +60,11 @@ export class UserService implements IUserService {
 
   async getUserByID(id: number): Promise<UserDto> {
     const user = await this.userRepo.findByID(id)
+
     if (!Boolean(user)) {
       throw new UserException(ResultCode.USER_NOT_EXIST, `id: ${id}`)
     }
+
     return new UserDto(user)
   }
 
@@ -88,37 +82,24 @@ export class UserService implements IUserService {
       }
     })
 
-
-    if (Boolean(user)) {
-      exists = true
-    }
+    if (Boolean(user)) exists = true
 
     return exists
   }
 
   async isEmailExist(email: string): Promise<boolean> {
     let exists: boolean = false
-    const user = await User.findOne({
-      where: {
-        email
-      }
-    })
-    if (Boolean(user)) {
-      exists = true
-    }
+    const user = await this.userRepo.findByEmail(email)
+    if (Boolean(user)) exists = true
+
     return exists
   }
 
   async isPhoneExist(phone: string): Promise<boolean> {
     let exists: boolean = false
-    const user = await User.findOne({
-      where: {
-        phone
-      }
-    })
-    if (Boolean(user)) {
-      exists = true
-    }
+    const user = await this.userRepo.findByPhone(phone)
+    if (Boolean(user)) exists = true
+
     return exists
   }
 }
